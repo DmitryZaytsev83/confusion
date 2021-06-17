@@ -1,28 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
-import DishDetailComponent from "./DishDetailComponent";
+
+function RenderMenuItem({dish, onClick}) {
+    return (
+        <Card onClick={() => onClick(dish.id)}>
+            <CardImg src={dish.image} alt={dish.name}/>
+            <CardImgOverlay>
+                <CardTitle>{dish.name}</CardTitle>
+            </CardImgOverlay>
+        </Card>
+    )
+}
 
 function Menu(props) {
-    const [selectedDish, setSelectedDish] = useState(null);
-    const menu = props.dishes.map((dish) => {
-        return (
-            <div key={dish.id} className="col-12 col-md-5 m-1">
-                <Card onClick={() => setSelectedDish(dish)}>
-                    <CardImg src={dish.image} alt={dish.name}/>
-                    <CardImgOverlay>
-                        <CardTitle>{dish.name}</CardTitle>
-                    </CardImgOverlay>
-                </Card>
-            </div>
-        );
-    });
-
     return (
-        <div className="container">
-            <div className="row">
-                {menu}
-            </div>
-            {selectedDish && <DishDetailComponent dish={selectedDish}/>}
+        <div className="row">
+            {props.dishes.map((dish) => {
+                return (
+                    <div key={dish.id} className="col-12 col-md-5 m-1">
+                        <RenderMenuItem dish={dish} onClick={props.onClickHandler} />
+                    </div>
+                );
+            })}
         </div>
     );
 }
