@@ -10,6 +10,7 @@ import { LEADERS } from "../shared/leaders";
 import { PROMOTIONS } from "../shared/promotions";
 import { COMMENTS } from "../shared/comments";
 import DishDetailComponent from "./DishDetailComponent";
+import AboutComponent from "./AboutComponent";
 
 const HomePage = (props) => {
     const dish = DISHES.filter((dish) => dish.featured)[0];
@@ -38,6 +39,7 @@ function Main() {
                 <Route exact path="/menu" component={() => <MenuComponent dishes={DISHES}/>}/>
                 <Route path="/menu/:dishId" component={DishWithId}/>
                 <Route exact path="/contactus" component={() => <ContactComponent/>}/>
+                <Route exact path="/aboutus" component={() => <AboutComponent leaders={LEADERS}/>}/>
                 <Redirect to="/home"/>
             </Switch>
             <FooterComponent/>
